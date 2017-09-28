@@ -2,7 +2,7 @@
  * @Author: Ghost.liu 
  * @Date: 2017-09-27 20:00:15 
  * @Last Modified by: Ghost.liu
- * @Last Modified time: 2017-09-28 13:38:57
+ * @Last Modified time: 2017-09-28 14:05:59
  */
 
 ; (function (win, $) {
@@ -16,7 +16,7 @@
             threshold: 0,               // 提前加载
             parentName: doc.body,
             direction: 'v',
-            defaultPic: "failed.jpg"
+            defaultPic: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
         }
     win.lazyLoadPic = function (option) {
         this.option = $.extend({}, defaultOption, option);
@@ -87,6 +87,10 @@
                 [].splice.call(targets, index, 1, undefined);
             }
         }, this);
+        //对空数据进行过滤
+        option.targets = option.targets.filter(function(target){
+            return target !== undefined && target != null;
+        });
     }
 })(window, window.Zepto || window.jQuery)
 
