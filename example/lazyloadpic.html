@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0" charset="UTF-8">
+    <title>lazyLoadPic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* 防止点击闪烁 */
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            /* 缩放网页，文字大小不变 */
+            -webkit-text-size-adjust: none;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        h1 {
+            margin: 10px;
+            font-size: 20px;
+        }
+
+        h2 {
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        h3 {
+            margin: 10px;
+            font-size: 14px;
+        }
+
+        .box {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .l,
+        .r {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        .l img {
+            width: 100%;
+            height: auto;
+        }
+
+        .r {
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container_y {
+            width: 102px;
+            height: 326px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+        }
+
+        .container_y .pic_box {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .container_y .pic_box:last-child {
+            margin-bottom: 0;
+        }
+
+        .container_y .pic_box img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>图片懒加载</h1>
+    <h2>滚动页面进行懒加载，支持img标签和背景图片</h2>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2304820535,3019606434&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=910178151,2880414895&amp;fm=58"></div>
+    </div>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4225909086,2808075944&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" id="not" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=797219705,2730811835&amp;fm=58"></div>
+    </div>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=98337435,3724632899&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" data-original="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2868953317,621257426&amp;fm=58"></div>
+    </div>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=107152989,4091147141&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" data-original="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3633830269,482629468&amp;fm=58"></div>
+    </div>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2135669014,910519347&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1077020237,2867504264&amp;fm=58"></div>
+    </div>
+    <div class="box">
+        <div class="l">
+            <img class="lazyload-pic" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2900120426,422035347&amp;fm=58"
+                alt="">
+        </div>
+        <div class="r lazyload-pic" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4074712638,1299274677&amp;fm=58"></div>
+    </div>
+    <h2>滚动内部容器实现懒加载</h2>
+    <div class="container_y">
+        <div class="pic_box">
+            <img class="lazyload-v" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3805961581,308107692&fm=58"
+                alt="">
+        </div>
+        <div class="pic_box">
+            <img class="lazyload-v" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2625179865,976369283&fm=58"
+                alt="">
+        </div>
+        <div class="pic_box">
+            <img class="lazyload-v" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3103356324,3406830397&fm=58"
+                alt="">
+        </div>
+        <div class="pic_box">
+            <img class="lazyload-v" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2334240158,3945500866&fm=58"
+                alt="">
+        </div>
+        <div class="pic_box">
+            <img class="lazyload-v" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2118622379,2100099484&fm=58"
+                alt="">
+        </div>
+    </div>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/lazyLoadPic.js"></script>
+    <script>
+        new lazyLoadPic({
+            className: "lazyload-pic"
+        });
+        new lazyLoadPic({
+            className: "lazyload-v",
+            parentName: "container_y",
+        });
+    </script>
+</body>
+
+</html>
